@@ -7,8 +7,34 @@
 
 import Foundation
 
-public class Pokemon {
-    
+public class Pokemon: Codable {
+    let id: Int
+    let name: String
+    let height: Int
+    let weight: Int
+    let types: [PokemonType]
+
+    // MARK: - TypeElement
+    struct PokemonType: Codable {
+        let type: String
+        
+        enum RootCodingKeys: String, CodingKey {
+            case slot
+            case type
+        }
+        
+        enum TypeCodingKeys: String, CodingKey {
+            case name
+            case url
+        }
+        
+        init(from decoder: Decoder) throws {
+            let rootContainer = try decoder.container(keyedBy: RootCodingKeys.self)
+            let typeContainer = try rootContainer.nestedContainer(keyedBy: TypeCodingKeys.self, forKey: .type)
+            type = try typeContainer.decode(String.self, forKey: .name)
+        }
+    }
+
 }
 
 public class PokemonSummary: Codable {

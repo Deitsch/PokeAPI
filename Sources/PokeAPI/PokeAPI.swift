@@ -51,4 +51,33 @@ public class PokeAPI {
             .eraseToAnyPublisher()
     }
     
+    public func loadPokemon(by id: Int) -> AnyPublisher<Pokemon, PokeAPIError> {
+        let pokemonURL = apiURL.appendingPathComponent("pokemon").appendingPathComponent("\(id)")
+        
+        var request = URLRequest(url: pokemonURL)
+        request.setHttpMethod(.GET)
+        
+        return urlSession.dataTaskPublisher(for: request)
+            .tryMap() { element -> Data in
+                guard let httpResponse = element.response as? HTTPURLResponse else {
+                    throw PokeAPIError.internalServerError
+                }
+                guard httpResponse.statusCode == 200 else {
+                    throw PokeAPIError.someError
+                }
+                return element.data
+            }
+            .decode(type: Pokemon.self, decoder: JSONDecoder())
+            .mapError { error in
+                switch error {
+                case is Swift.DecodingError:
+                    return .decodingError
+                case let err as PokeAPIError:
+                    return err
+                default:
+                    return .unknown
+                }
+            }
+            .eraseToAnyPublisher()
+    }
 }

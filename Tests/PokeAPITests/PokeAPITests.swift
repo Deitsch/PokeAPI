@@ -37,9 +37,31 @@ final class PokeAPITests: XCTestCase {
         
         waitForExpectations(timeout: 10)
 
-        // Asserting that our Combine pipeline yielded the
-        // correct output:
         XCTAssertNil(error)
         XCTAssertGreaterThan(pokemonSummaryList.count, 0)
+    }
+    
+    func testLoadPokemonById() throws {
+        
+        var error: Error?
+        let expectation = expectation(description: "loadPokemonById")
+        var pokemon: Pokemon?
+        
+        PokeAPI().loadPokemon(by: 1).sink(receiveCompletion: { result in
+            switch result {
+            case .finished:
+                break
+            case .failure(let err):
+                error = err
+            }
+            expectation.fulfill()
+        }, receiveValue: { value in
+            pokemon = value
+        }).store(in: &cancellables)
+        
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertNil(error)
+//        XCTAssertGreaterThan(pokemon, 0)
     }
 }
