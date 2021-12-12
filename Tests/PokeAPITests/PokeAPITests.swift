@@ -32,7 +32,7 @@ final class PokeAPITests: XCTestCase {
             pokemonSummaryList = value
         }).store(in: &cancellables)
         
-        waitForExpectations(timeout: 10)
+        wait(for: [expectation], timeout: 10)
 
         XCTAssertNil(error)
         XCTAssertGreaterThan(pokemonSummaryList.count, 0)
@@ -56,8 +56,8 @@ final class PokeAPITests: XCTestCase {
             pokemon = value
         }).store(in: &cancellables)
         
-        waitForExpectations(timeout: 10)
-        print(error)
+        wait(for: [expectation], timeout: 10)
+//        print(error)
         XCTAssertNil(error)
         XCTAssertEqual(pokemon?.name ?? "", "bulbasaur")
     }
