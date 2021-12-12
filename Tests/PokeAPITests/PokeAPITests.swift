@@ -11,9 +11,6 @@ final class PokeAPITests: XCTestCase {
     }
     
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
         XCTAssertEqual(PokeAPI().heyPokeApi(), "hey PokeApi")
     }
     
@@ -60,8 +57,8 @@ final class PokeAPITests: XCTestCase {
         }).store(in: &cancellables)
         
         waitForExpectations(timeout: 10)
-        
+        print(error)
         XCTAssertNil(error)
-//        XCTAssertGreaterThan(pokemon, 0)
+        XCTAssertEqual(pokemon?.name ?? "", "bulbasaur")
     }
 }

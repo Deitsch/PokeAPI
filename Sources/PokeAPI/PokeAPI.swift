@@ -40,8 +40,8 @@ public class PokeAPI {
             .map { $0.results }
             .mapError { error in
                 switch error {
-                case is Swift.DecodingError:
-                    return .decodingError
+                case is DecodingError:
+                    return .decodingError(error as! DecodingError)
                 case let err as PokeAPIError:
                     return err
                 default:
@@ -70,8 +70,8 @@ public class PokeAPI {
             .decode(type: Pokemon.self, decoder: JSONDecoder())
             .mapError { error in
                 switch error {
-                case is Swift.DecodingError:
-                    return .decodingError
+                case is DecodingError:
+                    return .decodingError(error as! DecodingError)
                 case let err as PokeAPIError:
                     return err
                 default:

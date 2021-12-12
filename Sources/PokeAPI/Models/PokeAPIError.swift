@@ -10,6 +10,6 @@ import Foundation
 public enum PokeAPIError: Error {
     case internalServerError
     case someError
-    case decodingError
+    case decodingError(DecodingError)
     case unknown
 }
