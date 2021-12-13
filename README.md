@@ -9,7 +9,7 @@ PokeAPI supports SPM, CocoaPods and Carthage. Preferably use SPM as it is now th
 ### Swift Package Manager
 
 * File > Swift Packages > Add Package Dependency
-* Add https://github.com/Deitsch/PokeAPI.git
+* Add `https://github.com/Deitsch/PokeAPI.git`
 
 ### CocoaPods
 
