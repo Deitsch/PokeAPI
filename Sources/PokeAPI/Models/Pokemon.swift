@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum NameUrlCodingKeys: String, CodingKey {
+    case name
+    case url
+}
+
 public class Pokemon: Codable {
     let id: Int
     let name: String
@@ -16,11 +21,6 @@ public class Pokemon: Codable {
     let stats: [PokemonStat]
     let abilities: [PokemonAbility]
     let sprites: PokemonSprites
-    
-    enum NameUrlCodingKeys: String, CodingKey {
-        case name
-        case url
-    }
 
     // MARK: - TypeElement
     struct PokemonType: Codable {
