@@ -8,7 +8,7 @@ public class PokeAPI {
     private let apiURL = URL(string: "https://pokeapi.co/api/v2/")!
     private let urlSession: URLSession
     
-    init() {
+    public init() {
         urlSession = URLSession(configuration: URLSessionConfiguration.default)
     }
     
