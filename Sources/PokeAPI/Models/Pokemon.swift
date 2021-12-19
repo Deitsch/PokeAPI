@@ -13,41 +13,41 @@ enum NameUrlCodingKeys: String, CodingKey {
 }
 
 public class Pokemon: Codable {
-    let id: Int
-    let name: String
-    let height: Int
-    let weight: Int
-    let types: [PokemonType]
-    let stats: [PokemonStat]
-    let abilities: [PokemonAbility]
-    let sprites: PokemonSprites
+    public let id: Int
+    public let name: String
+    public let height: Int
+    public let weight: Int
+    public let types: [PokemonType]
+    public let stats: [PokemonStat]
+    public let abilities: [PokemonAbility]
+    public let sprites: PokemonSprites
 
     // MARK: - TypeElement
-    struct PokemonType: Codable {
-        let type: String
+    public struct PokemonType: Codable {
+        public let type: String
         
         enum RootCodingKeys: String, CodingKey {
             case slot
             case type
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let rootContainer = try decoder.container(keyedBy: RootCodingKeys.self)
             let typeContainer = try rootContainer.nestedContainer(keyedBy: NameUrlCodingKeys.self, forKey: .type)
             type = try typeContainer.decode(String.self, forKey: .name)
         }
     }
     
-    struct PokemonStat: Codable {
-        let name: String
-        let baseStat: Int
+    public struct PokemonStat: Codable {
+        public let name: String
+        public let baseStat: Int
         
         enum RootCodingKeys: String, CodingKey {
             case baseStat = "base_stat"
             case stat
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let rootContainer = try decoder.container(keyedBy: RootCodingKeys.self)
             baseStat = try rootContainer.decode(Int.self, forKey: .baseStat)
             let statContainer = try rootContainer.nestedContainer(keyedBy: NameUrlCodingKeys.self, forKey: .stat)
@@ -55,16 +55,16 @@ public class Pokemon: Codable {
         }
     }
     
-    struct PokemonAbility: Codable {
-        let name: String
-        let isHidden: Bool
+    public struct PokemonAbility: Codable {
+        public let name: String
+        public let isHidden: Bool
         
         enum RootCodingKeys: String, CodingKey {
             case isHidden = "is_hidden"
             case ability
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let rootContainer = try decoder.container(keyedBy: RootCodingKeys.self)
             isHidden = try rootContainer.decode(Bool.self, forKey: .isHidden)
             let abilityContainer = try rootContainer.nestedContainer(keyedBy: NameUrlCodingKeys.self, forKey: .ability)
@@ -72,16 +72,16 @@ public class Pokemon: Codable {
         }
     }
     
-    struct PokemonSprites: Codable {
-        let frontDefault: String
-        let frontFemale: String?
-        let frontShiny: String?
-        let frontShinyFemale: String?
+    public struct PokemonSprites: Codable {
+        public let frontDefault: String
+        public let frontFemale: String?
+        public let frontShiny: String?
+        public let frontShinyFemale: String?
         
-        let backDefault: String
-        let backFemale: String?
-        let backShiny: String?
-        let backShinyFemale: String?
+        public let backDefault: String
+        public let backFemale: String?
+        public let backShiny: String?
+        public let backShinyFemale: String?
         
         enum RootCodingKeys: String, CodingKey {
             case frontDefault = "front_default"
@@ -95,7 +95,7 @@ public class Pokemon: Codable {
             case backShinyFemale = "back_shiny_female"
         }
         
-        init(from decoder: Decoder) throws {
+        public init(from decoder: Decoder) throws {
             let rootContainer = try decoder.container(keyedBy: RootCodingKeys.self)
             frontDefault = try rootContainer.decode(String.self, forKey: .frontDefault)
             frontFemale = try? rootContainer.decode(String.self, forKey: .frontFemale)

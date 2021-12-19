@@ -8,10 +8,10 @@
 import Foundation
 
 public class PokemonSummary: Codable {
-    let id: String
-    let name: String
-    let url: String
-    let spriteUrl: String
+    public let id: String
+    public let name: String
+    public let url: String
+    public let spriteUrl: String
     
     required public init(from decoder: Decoder) throws {
         let rootContainer = try decoder.container(keyedBy: NameUrlCodingKeys.self)
