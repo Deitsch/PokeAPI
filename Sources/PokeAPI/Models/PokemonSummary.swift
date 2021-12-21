@@ -8,7 +8,7 @@
 import Foundation
 
 public class PokemonSummary: Codable {
-    public let id: String
+    public let id: Int
     public let name: String
     public let url: String
     public let spriteUrl: String
@@ -18,7 +18,7 @@ public class PokemonSummary: Codable {
         name = try rootContainer.decode(String.self, forKey: .name)
         url = try rootContainer.decode(String.self, forKey: .url)
         // create values not provided in the api but needed for proper displaying a list
-        id = URL(string: url)!.lastPathComponent
+        id = Int(URL(string: url)!.lastPathComponent)!
         spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png"
     }
 }
