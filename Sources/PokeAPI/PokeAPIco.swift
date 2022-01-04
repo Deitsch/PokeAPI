@@ -3,7 +3,7 @@
 import Foundation
 import Combine
 
-public class PokeAPI {
+public class PokeAPIco {
     
     private let apiURL = URL(string: "https://pokeapi.co/api/v2/")!
     private let urlSession: URLSession

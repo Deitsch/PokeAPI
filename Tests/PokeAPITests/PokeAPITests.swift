@@ -11,7 +11,7 @@ final class PokeAPITests: XCTestCase {
     }
     
     func testExample() throws {
-        XCTAssertEqual(PokeAPI().heyPokeApi(), "hey PokeApi")
+        XCTAssertEqual(PokeAPIco().heyPokeApi(), "hey PokeApi")
     }
     
     func testLoadPokemon() throws {
@@ -20,7 +20,7 @@ final class PokeAPITests: XCTestCase {
         let expectation = expectation(description: "loadPokemon")
         var pokemonSummaryList: [PokemonSummary] = []
         
-        PokeAPI().loadPokemon().sink(receiveCompletion: { result in
+        PokeAPIco().loadPokemon().sink(receiveCompletion: { result in
             switch result {
             case .finished:
                 break
@@ -44,7 +44,7 @@ final class PokeAPITests: XCTestCase {
         let expectation = expectation(description: "loadPokemonById")
         var pokemon: Pokemon?
         
-        PokeAPI().loadPokemon(by: 1).sink(receiveCompletion: { result in
+        PokeAPIco().loadPokemon(by: 1).sink(receiveCompletion: { result in
             switch result {
             case .finished:
                 break
